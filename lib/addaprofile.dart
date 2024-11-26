@@ -130,7 +130,7 @@ class _AddProfileState extends State<AddProfile> {
                       if (imagePath != null) {
                         final newCat = {
                           'name': nameController.text,
-                          'age': ageController.text,
+                          'age': int.parse(ageController.text),
                           'description': aboutController.text,
                           'image': imagePath ??
                               "", // Ensure the image path is correct
