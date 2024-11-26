@@ -1,6 +1,7 @@
 import 'dart:io';
-import 'Data.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_5/Data.dart';
 import 'package:flutter_application_5/Petprofile.dart';
 
 class Home extends StatefulWidget {
@@ -29,9 +30,9 @@ class _HomeState extends State<Home> {
   //     'age': 1,
   //     'type': "Himalayan Cat",
   //     'image': 'images/14.jpg',
-  //     'description': '''
-  //     Minnie is a sweet and gentle cat who enjoys lounging around and being pampered.
-  //     She requires regular grooming to maintain her beautiful fur.
+  //    'description': '''
+  //     Minnie is a playful and energetic cat who loves to swim and play with water.
+  //     He needs plenty of space to play and daily activity to stay healthy.
   //   ''',
   //     'weight': '23kg'
   //   },
@@ -40,10 +41,9 @@ class _HomeState extends State<Home> {
   //     'age': 2,
   //     'type': "American Shorthair",
   //     'image': 'images/4.jpg',
-  //     'description': '''
-  //     Mocha is a friendly and sociable cat, always ready to greet visitors with a purr.
-  //     She needs daily interaction and playtime to thrive.
-
+  //    'description': '''
+  //     Mocha is a playful and energetic cat who loves to swim and play with water.
+  //     He needs plenty of space to play and daily activity to stay healthy.
   //   ''',
   //     'weight': '20kg'
   //   },
@@ -53,8 +53,8 @@ class _HomeState extends State<Home> {
   //     'type': "Persian Cat",
   //     'image': 'images/6.jpg',
   //     'description': '''
-  //     Kali has a calm demeanor and prefers quiet environments, making her the perfect lap cat.
-  //     She requires regular grooming to keep her coat in good condition.
+  //     Kaliis a playful and energetic cat who loves to swim and play with water.
+  //     He needs plenty of space to play and daily activity to stay healthy.
   //   ''',
   //     'weight': '20kg'
   //   },
@@ -63,10 +63,9 @@ class _HomeState extends State<Home> {
   //     'age': 6,
   //     'type': "Himalayan Cat",
   //     'image': 'images/13.jpg',
-  //     'description': '''
-  //     Milo loves attention and is very affectionate, often following his owner around the house.
-  //     He needs special care for his fur to keep it looking great.
-
+  //   'description': '''
+  //     Leo is a playful and energetic cat who loves to swim and play with water.
+  //     He needs plenty of space to play and daily activity to stay healthy.
   //   ''',
   //     'weight': '21kg'
   //   },
@@ -76,8 +75,8 @@ class _HomeState extends State<Home> {
   //     'type': "Persian Cat",
   //     'image': 'images/11.jpg',
   //     'description': '''
-  //     Luna is playful and enjoys interactive toys, though she also appreciates quiet time.
-  //     Regular grooming is important to maintain her beautiful coat.
+  //     Luna is a playful and energetic cat who loves to swim and play with water.
+  //     He needs plenty of space to play and daily activity to stay healthy.
   //   ''',
   //     'weight': '20kg'
   //   },
@@ -87,8 +86,8 @@ class _HomeState extends State<Home> {
   //     'type': "Turkish Van",
   //     'image': 'images/12.jpg',
   //     'description': '''
-  //     Coco is wise and loving, often acting as the matriarch of the household.
-  //     She needs daily love and attention to feel happy and secure.
+  //     Coco is a playful and energetic cat who loves to swim and play with water.
+  //     He needs plenty of space to play and daily activity to stay healthy.
   //   ''',
   //     'weight': '30kg'
   //   },
@@ -97,9 +96,9 @@ class _HomeState extends State<Home> {
   //     'age': 8,
   //     'type': "Himalayan Cat",
   //     'image': 'images/10.jpg',
-  //     'description': '''
-  //     Pixel is known for his stunning blue eyes and is very affectionate with children.
-  //     He requires regular interaction and playtime to keep him happy.
+  //    'description': '''
+  //     Pixel is a playful and energetic cat who loves to swim and play with water.
+  //     He needs plenty of space to play and daily activity to stay healthy.
   //   ''',
   //     'weight': '40kg'
   //   },
@@ -109,8 +108,8 @@ class _HomeState extends State<Home> {
   //     'type': "Oriental Shorthair",
   //     'image': 'images/15.jpg',
   //     'description': '''
-  //     Rocky is intelligent and curious, often exploring every nook and cranny of the house.
-  //     He needs mental and physical stimulation to stay engaged.
+  //     Rocky is a playful and energetic cat who loves to swim and play with water.
+  //     He needs plenty of space to play and daily activity to stay healthy.
   //   ''',
   //     'weight': '20kg'
   //   },
@@ -119,9 +118,9 @@ class _HomeState extends State<Home> {
   //     'age': 9,
   //     'type': "Turkish Van",
   //     'image': 'images/8.jpg',
-  //     'description': '''
-  //     Finn is laid-back and enjoys sunbathing, often found lounging in warm spots.
-  //     He requires minimal care but appreciates gentle affection.
+  //    'description': '''
+  //     Finn is a playful and energetic cat who loves to swim and play with water.
+  //     He needs plenty of space to play and daily activity to stay healthy.
   //   ''',
   //     'weight': '23kg'
   //   },
@@ -130,9 +129,9 @@ class _HomeState extends State<Home> {
   //     'age': 3,
   //     'type': "Oriental Shorthair",
   //     'image': 'images/2.jpg',
-  //     'description': '''
-  //     Daisy is a social butterfly, getting along well with other pets and people alike.
-  //     She needs regular social interaction to stay happy.
+  //    'description': '''
+  //     Daisy is a playful and energetic cat who loves to swim and play with water.
+  //     He needs plenty of space to play and daily activity to stay healthy.
   //   ''',
   //     'weight': '34kg'
   //   },
@@ -142,8 +141,8 @@ class _HomeState extends State<Home> {
   //     'type': "American Shorthair",
   //     'image': 'images/5.jpg',
   //     'description': '''
-  //     Mia is playful and loves to chase after toys, keeping her owners entertained.
-  //     She requires daily playtime to channel her energy.
+  //     Mia is a playful and energetic cat who loves to swim and play with water.
+  //     He needs plenty of space to play and daily activity to stay healthy.
   //   ''',
   //     'weight': '20kg'
   //   },
@@ -152,9 +151,9 @@ class _HomeState extends State<Home> {
   //     'age': 5,
   //     'type': "Persian Cat",
   //     'image': 'images/3.jpg',
-  //     'description': '''
-  //     Ruby is affectionate and enjoys cuddling, making her a favorite among family members.
-  //     She needs regular grooming to keep her coat looking beautiful.
+  //    'description': '''
+  //     Ruby is a playful and energetic cat who loves to swim and play with water.
+  //     He needs plenty of space to play and daily activity to stay healthy.
   //   ''',
   //     'weight': '34kg'
   //   },
