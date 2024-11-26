@@ -1,44 +1,48 @@
-import 'dart:io';
-
+import 'Data.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_application_5/addaprofile.dart';
 import 'package:flutter_application_5/editProfile.dart';
 
 class Management extends StatefulWidget {
+  const Management({super.key});
+
   @override
   State<Management> createState() => _ManagementState();
 }
 
 class _ManagementState extends State<Management> {
   String searchQuery = '';
-  static List<Cat> cats = [
-    Cat(
-        name: 'Fluffy',
-        age: '2 years',
-        about: 'Fluffy is a cute cat.',
-        Type: 'a',
-        wedith: '30',
-        image: 'images/2.jpg'),
-    Cat(
-        name: 'Whiskers',
-        age: '4 years',
-        Type: 'a',
-        wedith: '30',
-        about: 'Whiskers loves to play.',
-        image: 'images/3.jpg'),
-    Cat(
-        name: 'Mittens',
-        age: '3 years',
-        Type: 'a',
-        wedith: '30',
-        about: 'Mittens is very friendly.',
-        image: 'images/4.jpg'),
-  ];
+
+  // static List<Cat> cats = [
+  //   Cat(
+  //       name: 'Fluffy',
+  //       age: '2 years',
+  //       about: 'Fluffy is a cute cat.',
+  //       Type: 'a',
+  //       wedith: '30',
+  //       image: 'images/2.jpg'),
+  //   Cat(
+  //       name: 'Whiskers',
+  //       age: '4 years',
+  //       Type: 'a',
+  //       wedith: '30',
+  //       about: 'Whiskers loves to play.',
+  //       image: 'images/3.jpg'),
+  //   Cat(
+  //       name: 'Mittens',
+  //       age: '3 years',
+  //       Type: 'a',
+  //       wedith: '30',
+  //       about: 'Mittens is very friendly.',
+  //       image: 'images/4.jpg'),
+  // ];
+
   TextEditingController info = TextEditingController();
 
-  List<Cat> get filteredCats {
+  List<Map<String, dynamic>> get filteredCats {
     return cats.where((cat) {
-      final name = cat.name.toLowerCase();
+      final name = cat['name'].toLowerCase();
       return name.contains(searchQuery.toLowerCase());
     }).toList();
   }
@@ -64,7 +68,7 @@ class _ManagementState extends State<Management> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text('Confirm logout'),
+                    title: Text('Confirm logout'),
                     content: const Text(
                       'Are you sure you want to logout?',
                       style: TextStyle(
@@ -142,11 +146,11 @@ class _ManagementState extends State<Management> {
               final newCat = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddProfile(),
+                  builder: (context) => const AddProfile(),
                 ),
               );
 
-              if (newCat != null && newCat is Cat) {
+              if (newCat != null) {
                 setState(() {
                   cats.add(newCat);
                 });
@@ -156,7 +160,7 @@ class _ManagementState extends State<Management> {
 
             style: ButtonStyle(
               backgroundColor:
-                  MaterialStateProperty.all<Color>(const Color(0xFFed7a4d)),
+                  WidgetStateProperty.all<Color>(const Color(0xFFed7a4d)),
             ),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -184,10 +188,10 @@ class _ManagementState extends State<Management> {
 }
 
 class CatListView extends StatefulWidget {
-  final List<Cat> cats;
+  final List<Map<String, dynamic>> cats;
   final Function(int) deleteCat;
 
-  CatListView({required this.cats, required this.deleteCat});
+  const CatListView({super.key, required this.cats, required this.deleteCat});
 
   @override
   _CatListViewState createState() => _CatListViewState();
@@ -209,7 +213,7 @@ class _CatListViewState extends State<CatListView> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.asset(
-                      cat.image,
+                      cat['image'],
                       fit: BoxFit.fitHeight,
                       height: 100,
                       width: 100,
@@ -220,7 +224,7 @@ class _CatListViewState extends State<CatListView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        cat.name,
+                        cat['name'],
                         style: const TextStyle(
                           color: Color(0xFF090a09),
                           fontSize: 20,
@@ -228,8 +232,8 @@ class _CatListViewState extends State<CatListView> {
                         ),
                       ),
                       Text(
-                        cat.age,
-                        style: TextStyle(color: Color(0xFF090a09)),
+                        cat['age'].toString(),
+                        style: const TextStyle(color: Color(0xFF090a09)),
                       ),
                     ],
                   ),
@@ -239,7 +243,7 @@ class _CatListViewState extends State<CatListView> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.update),
+                    icon: const Icon(Icons.update),
                     onPressed: () async {
                       final updatedCat = await Navigator.push(
                         context,
@@ -249,7 +253,7 @@ class _CatListViewState extends State<CatListView> {
                         ),
                       );
 
-                      if (updatedCat != null && updatedCat is Cat) {
+                      if (updatedCat != null) {
                         setState(() {
                           widget.cats[index] = updatedCat;
                         });
@@ -257,7 +261,7 @@ class _CatListViewState extends State<CatListView> {
                     },
                   ),
                   IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     onPressed: () {
                       widget.deleteCat(index);
                     },
@@ -270,23 +274,4 @@ class _CatListViewState extends State<CatListView> {
       },
     );
   }
-}
-
-class Cat {
-  final String name;
-  final String age;
-  final String about;
-  final String image;
-  final String Type;
-
-  final String wedith;
-
-  Cat({
-    required this.name,
-    required this.age,
-    required this.about,
-    required this.image,
-    required this.Type,
-    required this.wedith,
-  });
 }

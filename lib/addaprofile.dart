@@ -1,14 +1,14 @@
 import 'dart:io';
-import 'dart:math';
+
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_5/ManagementCats.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
 class AddProfile extends StatefulWidget {
-  final Cat? cat;
+  final Map<String, dynamic>?  cat;
   const AddProfile({super.key, this.cat});
 
   @override
@@ -30,12 +30,12 @@ class _AddProfileState extends State<AddProfile> {
   void initState() {
     super.initState();
     if (widget.cat != null) {
-      nameController.text = widget.cat!.name;
-      ageController.text = widget.cat!.age;
-      aboutController.text = widget.cat!.about;
-      WedithController.text = widget.cat!.wedith;
-      TypeController.text = widget.cat!.Type;
-      _selectedImage = File(widget.cat!.image);
+      nameController.text = widget.cat!['name'];
+      ageController.text = widget.cat!['age'].toString();
+      aboutController.text = widget.cat!['description'];
+      WedithController.text = widget.cat!['weight'];
+      TypeController.text = widget.cat!['type'];
+      _selectedImage = File(widget.cat!['image']);
     }
   }
 
@@ -70,17 +70,17 @@ class _AddProfileState extends State<AddProfile> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      backgroundColor: Color(0xFFF5EDE2),
+      backgroundColor: const Color(0xFFF5EDE2),
       appBar: AppBar(
-        backgroundColor: Color(0xFFF5EDE2),
+        backgroundColor: const Color(0xFFF5EDE2),
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(10.0),
           child: CircleAvatar(
-            backgroundColor: Color(0xFFF5EDE2),
+            backgroundColor: const Color(0xFFF5EDE2),
             radius: 4,
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios,
                 color: Colors.black,
                 size: 17,
@@ -190,18 +190,18 @@ class _AddProfileState extends State<AddProfile> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       if (_selectedImage != null) {
-                        final newCat = Cat(
-                          name: nameController.text,
-                          age: ageController.text,
-                          about: aboutController.text,
-                          image: _selectedImage!.path,
-                          Type: TypeController.text,
-                          wedith: WedithController.text,
-                        );
+                        final newCat = {
+                       'name': nameController.text,
+                        'age': ageController.text,
+                      'type': TypeController.text,
+                       'image': _selectedImage!.path,
+                       'description': aboutController.text,
+                      'weight': WedithController.text
+                        };
                         Navigator.pop(context, newCat);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text('Please select an image'),
                           ),
                         );
@@ -210,13 +210,13 @@ class _AddProfileState extends State<AddProfile> {
                   },
                   style: ElevatedButton.styleFrom(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 150, vertical: 16),
+                        const EdgeInsets.symmetric(horizontal: 150, vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                     backgroundColor: const Color.fromARGB(255, 237, 106, 6),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Add Cat',
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
@@ -236,17 +236,17 @@ Widget _buildInputField(
     controller: controller,
     decoration: InputDecoration(
       hintText: hint,
-      hintStyle: TextStyle(color: Colors.grey),
+      hintStyle: const TextStyle(color: Colors.grey),
       filled: true,
       fillColor: const Color.fromARGB(255, 246, 246, 246),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: Color.fromARGB(255, 230, 100, 49),
         ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Color.fromARGB(255, 230, 100, 49)),
+        borderSide: const BorderSide(color: Color.fromARGB(255, 230, 100, 49)),
         borderRadius: BorderRadius.circular(30),
       ),
       suffixIcon: Icon(icon),

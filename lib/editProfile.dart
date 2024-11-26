@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_5/ManagementCats.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
 class EditProfile extends StatefulWidget {
-  final Cat cat;
-  const EditProfile({Key? key, required this.cat}) : super(key: key);
+  final  Map<String, dynamic> cat;
+  const EditProfile({super.key, required this.cat});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -28,13 +28,13 @@ class _EditProfileState extends State<EditProfile> {
   void initState() {
     super.initState();
 
-    nameController = TextEditingController(text: widget.cat.name);
-    ageController = TextEditingController(text: widget.cat.age);
-    TypeController = TextEditingController(text: widget.cat.Type);
-    WedithController = TextEditingController(text: widget.cat.wedith);
+    nameController = TextEditingController(text: widget.cat['name']);
+    ageController = TextEditingController(text: widget.cat['age'].toString());
+    TypeController = TextEditingController(text: widget.cat['type']);
+    WedithController = TextEditingController(text: widget.cat['weight']);
 
-    aboutController = TextEditingController(text: widget.cat.about);
-    _selectedImage = File(widget.cat.image);
+    aboutController = TextEditingController(text: widget.cat['description']);
+    _selectedImage = File(widget.cat['image']);
   }
 
   Future<void> _pickImage() async {
@@ -138,10 +138,10 @@ class _EditProfileState extends State<EditProfile> {
               _buildInputField('Age:', ageController, Icons.calendar_today),
               const SizedBox(height: 16),
               _buildInputField('type:', TypeController, Icons.female),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildInputField(
                   'Weight:', WedithController, Icons.monitor_weight_rounded),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildInputField(
                   'Description:', aboutController, Icons.description),
               const SizedBox(height: 40),
@@ -150,13 +150,14 @@ class _EditProfileState extends State<EditProfile> {
                   if (_selectedImage != null &&
                       nameController.text.isNotEmpty &&
                       ageController.text.isNotEmpty) {
-                    final updatedCat = Cat(
-                        name: nameController.text,
-                        age: ageController.text,
-                        about: aboutController.text,
-                        image: _selectedImage!.path,
-                        wedith: WedithController.text,
-                        Type: TypeController.text);
+                    final updatedCat =  {
+                       'name': nameController.text,
+                        'age':int.parse(ageController.text) ,
+                      'type': TypeController.text,
+                       'image': _selectedImage!.path,
+                       'description': aboutController.text,
+                      'weight': '23kg'
+                        };
                     Navigator.pop(context, updatedCat);
                   }
                 },
