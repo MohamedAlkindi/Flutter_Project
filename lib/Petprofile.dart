@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 class PetProfile extends StatelessWidget {
@@ -85,7 +83,7 @@ class PetProfile extends StatelessWidget {
                 children: [
                   bulidinfoCard('${age} Years old', 'Age', Icons.pets),
                   bulidinfoCard(weight, 'Weight', Icons.monitor_weight_rounded),
-                  bulidinfoCard(type, 'Type', Icons.female),
+                  bulidinfoCard(type, 'Type', Icons.category_sharp),
                 ],
               ),
               SizedBox(height: 24),

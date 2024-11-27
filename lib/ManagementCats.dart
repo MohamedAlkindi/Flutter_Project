@@ -205,21 +205,27 @@ class _CatListViewState extends State<CatListView> {
       itemBuilder: (context, index) {
         final cat = widget.cats[index];
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
+          padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
           child: Card(
+            elevation: 3, // ارتفاع الظل
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20), // زوايا الكارد
+            ),
             child: ListTile(
               title: Row(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      cat['image'],
-                      fit: BoxFit.fitHeight,
-                      height: 100,
-                      width: 100,
+                  Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20), // زوايا الصورة
+                      image: DecorationImage(
+                        image: AssetImage(cat['image']),
+                        fit: BoxFit.cover, // ملء المساحة
+                      ),
                     ),
                   ),
-                  const SizedBox(width: 25),
+                  const SizedBox(width: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -232,7 +238,7 @@ class _CatListViewState extends State<CatListView> {
                         ),
                       ),
                       Text(
-                        cat['age'].toString(),
+                        "${cat['age']} Year",
                         style: const TextStyle(color: Color(0xFF090a09)),
                       ),
                     ],
@@ -252,7 +258,6 @@ class _CatListViewState extends State<CatListView> {
                               EditProfile(cat: widget.cats[index]),
                         ),
                       );
-
                       if (updatedCat != null) {
                         setState(() {
                           widget.cats[index] = updatedCat;

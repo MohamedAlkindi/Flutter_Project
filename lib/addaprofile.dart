@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_5/ManagementCats.dart';
 
 class AddProfile extends StatefulWidget {
   final Map<String, dynamic>? cat;
@@ -19,35 +18,76 @@ class _AddProfileState extends State<AddProfile> {
   final TextEditingController typeController = TextEditingController();
 
   Future<void> _pickImageFromAssets(BuildContext context) async {
-    // قائمة الصور المتوفرة في مجلد assets
     final List<String> assetImages = [
       'images/16(1).jpg',
       'images/16(1).jpg',
       'images/16(1).jpg',
+
       // أضف المزيد من الصور هنا
     ];
 
-    // عرض Dialog لاختيار الصورة
     await showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Choose a Photo'),
+          title: const Text(
+            'Choose a Photo',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.orange,
+            ),
+          ),
           content: Container(
             width: double.maxFinite,
-            child: ListView.builder(
+            height: 400, // ارتفاع مناسب للقائمة
+            child: ListView.separated(
+              separatorBuilder: (context, index) => const SizedBox(height: 10),
               itemCount: assetImages.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading:
-                      Image.asset(assetImages[index], width: 50, height: 50),
-                  title: Text(assetImages[index].split('/').last),
+                return GestureDetector(
                   onTap: () {
                     setState(() {
                       imagePath = assetImages[index];
                     });
-                    Navigator.pop(context);
+                    Navigator.pop(context); // إغلاق النافذة بعد الاختيار
                   },
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.orange, width: 2),
+                      color: Colors.white,
+                    ),
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            assetImages[index],
+                            width: 70,
+                            height: 70,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            'Image ${index + 1}', // يمكنك تخصيص النص هنا
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.orange,
+                          size: 16,
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             ),
@@ -114,15 +154,17 @@ class _AddProfileState extends State<AddProfile> {
                   ],
                 ),
                 SizedBox(height: 60),
-                _buildInputField('Cat Name:', nameController),
+                _buildInputField('Cat Name:', nameController, Icons.pets),
                 SizedBox(height: 16),
-                _buildInputField('Type:', typeController),
+                _buildInputField('Type:', typeController, Icons.category_sharp),
                 SizedBox(height: 16),
-                _buildInputField('Age:', ageController),
+                _buildInputField('Age:', ageController, Icons.timeline),
                 SizedBox(height: 16),
-                _buildInputField('Weight:', wedithController),
+                _buildInputField(
+                    'Weight:', wedithController, Icons.monitor_weight_rounded),
                 SizedBox(height: 16),
-                _buildInputField('Description:', aboutController),
+                _buildInputField(
+                    'Description:', aboutController, Icons.description),
                 SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
@@ -130,7 +172,7 @@ class _AddProfileState extends State<AddProfile> {
                       if (imagePath != null) {
                         final newCat = {
                           'name': nameController.text,
-                          'age': int.parse(ageController.text),
+                          'age': ageController.text,
                           'description': aboutController.text,
                           'image': imagePath ??
                               "", // Ensure the image path is correct
@@ -164,11 +206,13 @@ class _AddProfileState extends State<AddProfile> {
     );
   }
 
-  Widget _buildInputField(String hint, TextEditingController controller) {
+  Widget _buildInputField(
+      String hint, TextEditingController controller, IconData icon) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
         hintText: hint,
+        prefixIcon: Icon(icon, color: Color.fromARGB(255, 230, 100, 49)),
         hintStyle: TextStyle(color: Colors.grey),
         filled: true,
         fillColor: const Color.fromARGB(255, 246, 246, 246),
